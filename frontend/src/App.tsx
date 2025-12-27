@@ -17,7 +17,7 @@ function App() {
 
       <Navbar />
 
-      <div className="flex-grow">
+      <div className="mt-[2rem] flex-grow">
         <Routes>
           <Route path="/" element={<Home />}/>
           <Route path="/events" element={<Events/>}/>

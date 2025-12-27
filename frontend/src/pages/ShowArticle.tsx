@@ -16,9 +16,9 @@ export default function ShowArticle() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const {slug} = useParams<{slug: string}>();
-
+  // console.log(`VITE_CORS_URL: ${import.meta.env.VITE_CORS_URL}/${slug}`);
   useEffect(() => {
-    fetch(`http://localhost:5000/articles/${slug}`)
+    fetch(`/articles/${slug}`)
       .then((res) => {
         if (!res.ok) throw new Error("Gagal memuat artikel");
         return res.json();
@@ -37,7 +37,7 @@ export default function ShowArticle() {
   if (error) return <p>Error: {error}</p>;
   if (!article) return <p>Tidak ada artikel ditemukan.</p>;
 
-  console.log(article.sanitizedHTML);
+  // console.log(article.sanitizedHTML);
 
   return (
     <div className="mx-auto p-4">
