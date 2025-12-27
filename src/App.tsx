@@ -8,6 +8,7 @@ import About from "./pages/About"
 import Events from "./pages/Events"
 import Members from "./pages/Members"
 import ShowArticle from "./pages/ShowArticle";
+import Articles from "./pages/Articles"
 
 function App() {
   console.log(import.meta.env.CORS_URL);
@@ -24,6 +25,7 @@ function App() {
           <Route path="/about" element={<About/>}/>
           <Route path="/members" element={<Members/>}/>
           <Route path="/showArticle/:slug" element={<ShowArticle/>}/> 
+          <Route path="/articles" element={<Articles/> }/>
         </Routes>
       </div>
       

@@ -6,7 +6,7 @@ const Countdown = () => {
   
   const calculateDaysLeft = () =>{
     const now = new Date();
-    const targetData = new Date("2025-12-07T00:00:00+07:00");
+    const targetData = new Date("2026-07-06T00:00:00+07:00");
     const differenceMs = targetData.getTime() - now.getTime();
     const days = Math.ceil(differenceMs / (1000 * 60 * 60 * 24));
     setDaysLeft(days > 0 ? days : 0);
