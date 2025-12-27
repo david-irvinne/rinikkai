@@ -28,7 +28,7 @@ function Articles() {
         {articles.map((a) => (
           <div>
             <h2 className="text-xl font-bold">
-              {a.title}
+              {a.id}. {a.title}
             </h2>
             <p className="text-slate-800">
               {a.description}
