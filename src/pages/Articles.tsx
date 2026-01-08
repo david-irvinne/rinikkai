@@ -1,5 +1,6 @@
 import {useEffect, useState} from "react";
 import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 type Article = {
   id?:number; 
@@ -20,22 +21,28 @@ function Articles() {
   }, []);
 
 
+
   return (
     <>
-      <div className="bg-slate-200">
+      <div className="">
         {articles.length === 0 && (<p>no articles found</p>)}
 
         {articles.map((a) => (
-          <div>
-            <h2 className="text-xl font-bold">
+          <div className="bg-slate-100 mb-2">
+            <h1 className="text-xl font-bold">
               {a.id}. {a.title}
-            </h2>
-            <p className="text-slate-800">
+            </h1>
+            <h2 className="text-slate-800">
               {a.description}
-            </p>
-            <ReactMarkdown>
-              {a.markdown}
-            </ReactMarkdown>
+            </h2>
+
+
+            <div className="prose"> 
+              <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                {a.markdown}
+              </ReactMarkdown>
+            </div>
+
 
           </div>
         ))}

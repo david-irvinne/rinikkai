@@ -8,7 +8,8 @@ import About from "./pages/About"
 import Events from "./pages/Events"
 import Members from "./pages/Members"
 import ShowArticle from "./pages/ShowArticle";
-import Articles from "./pages/Articles"
+import Articles from "./pages/Articles";
+import EditArticle from "./pages/EditArticle";
 
 function App() {
   console.log(import.meta.env.CORS_URL);
@@ -24,8 +25,9 @@ function App() {
           <Route path="/events" element={<Events/>}/>
           <Route path="/about" element={<About/>}/>
           <Route path="/members" element={<Members/>}/>
-          <Route path="/show_article/:id" element={<ShowArticle/>}/> 
           <Route path="/articles" element={<Articles/> }/>
+          <Route path="/show_article/:id" element={<ShowArticle/>}/> 
+          <Route path="/edit_article/:id" element={<EditArticle/> }/>
         </Routes>
       </div>
       
