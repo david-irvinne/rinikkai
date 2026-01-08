@@ -11,6 +11,9 @@ const Events = () => {
   const handleBackHome = () =>{
     navigate('/');
   }
+  const handleToArticles = () =>{
+    navigate('/articles');
+  }
 
   const handleEventClick = (slug: string) =>{
     navigate(`/showArticle/${slug}`);
@@ -25,6 +28,13 @@ const Events = () => {
             shape="w-[10rem] hover:cursor-pointer"
             text="text-center"
             onClick={handleBackHome}
+          />
+          <Button
+            title="See All Articles"
+            color="text-white bg-blue-500"
+            shape="w-[10rem] hover:cursor-pointer"
+            text="text-center"
+            onClick={handleToArticles}
           />
         </div>
 

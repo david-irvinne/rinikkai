@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 type Article = {
   id?:number; 
@@ -14,6 +14,7 @@ function EditArticle() {
   const {id} = useParams<{id: string}>();
 
   const [article, setArticle] = useState<Article>();
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch(`${API_URL}/article/${id}`)  
@@ -64,7 +65,7 @@ function EditArticle() {
             <label htmlFor="title" className="mb-[0.5rem]">
               Judul
             </label>
-            <input name="title" id="title" value={article.title} className="border border-slate-300 rounded-lg"              onChange={handleChange}/>
+            <input name="title" id="title" value={article.title} className="border border-slate-300 rounded-lg p-[0.5rem]"              onChange={handleChange}/>
           </div>
 
           <div className="flex flex-col">
@@ -72,7 +73,7 @@ function EditArticle() {
               Deskripsi
             </label>
             <textarea name="description" id="description" value={article.description}
-              className="border border-slate-300 rounded-lg"
+              className="border border-slate-300 rounded-lg p-[0.5rem]"
               onChange={handleChange}
               rows={3}
             />
@@ -83,15 +84,17 @@ function EditArticle() {
               Markdown 
             </label>
             <textarea name="markdown" id="markdown" value={article.markdown}
-              className="border border-slate-300 rounded-lg"
+              className="border border-slate-300 rounded-lg p-[0.5rem]"
               onChange={handleChange}
               rows={15}
             />
           </div>
         
           {/* button */}
-          <div>
-            <button type="submit" className="bg-blue-400 rounded-lg p-[0.5rem] text-white">Submit</button>
+          <div className="space-x-[0.5rem]">
+            <button type="submit" className="bg-blue-400 rounded-lg p-[0.5rem] text-white hover:cursor-pointer hover:bg-blue-500 transition ">Submit</button>
+
+            <button type="button" className="bg-red-700 rounded-lg p-[0.5rem] text-white hover:cursor-pointer hover:bg-red-800 transition " onClick={() => navigate(-1)}>Cancel</button>
           </div>
       
         </form>

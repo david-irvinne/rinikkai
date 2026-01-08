@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 
 type Article = {
@@ -15,6 +15,7 @@ export default function ShowArticle() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const {id} = useParams<{id: string}>();
+  const navigate = useNavigate();
   
   console.log(`${import.meta.env.VITE_CORS_URL}/article/${id}`);
   useEffect(() => {
@@ -23,8 +24,6 @@ export default function ShowArticle() {
     .then((data) => { setArticle(data); setLoading(false)})
     .catch((err) => {setError(err.message); setLoading(false)})
   }, []);
-
-  console.log("ini article", article);
 
   if (loading) return <p>Memuat artikel...</p>;
   if (error) return <p>Error: {error}</p>;
@@ -37,6 +36,7 @@ export default function ShowArticle() {
       <ReactMarkdown>
         {article.markdown}
       </ReactMarkdown>
+      <button type="button" className="bg-red-700 rounded-lg hover:cursor-pointer hover:bg-red-800 text-white p-[0.4rem] transition" onClick={() => navigate(`/articles`)}>Back</button>
     </div>
   );
 }
