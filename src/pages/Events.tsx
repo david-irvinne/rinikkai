@@ -11,17 +11,14 @@ const Events = () => {
   const handleBackHome = () =>{
     navigate('/');
   }
-  const handleToArticles = () =>{
-    navigate('/articles');
-  }
 
   const handleEventClick = (slug: string) =>{
     navigate(`/showArticle/${slug}`);
   }
   return (
     <>
-      <div className="h-[64rem]  rounded-[12px]  ">
-        <div className="py-[1rem]  flex justify-between ">
+      <div className="h-[64rem] rounded-[12px]">
+        <div className="py-[1rem] flex justify-between ">
           <Button
             title="Home"
             color="text-white bg-blue-500"
@@ -29,16 +26,9 @@ const Events = () => {
             text="text-center"
             onClick={handleBackHome}
           />
-          <Button
-            title="See All Articles"
-            color="text-white bg-blue-500"
-            shape="w-[10rem] hover:cursor-pointer"
-            text="text-center"
-            onClick={handleToArticles}
-          />
         </div>
 
-        <div className="h-[80%]">
+        <div className="h-[80%] mb-[1rem]">
           <div className=" grid grid-cols-2  gap-x-[1rem] h-full ">
             <div className="grid grid-rows-[1fr_2fr_2fr]  h-full ">
 
@@ -116,6 +106,24 @@ const Events = () => {
             </div>
           </div>
         </div>
+
+        <div className="space-x-[0.4rem]">
+          <Button
+            title="See All Articles"
+            color="text-white bg-blue-500"
+            shape="w-[10rem] hover:cursor-pointer"
+            text="text-center"
+            onClick={() => navigate("/articles")}
+          />
+          <Button
+            title="Create Article"
+            color="text-white bg-blue-500"
+            shape="w-[10rem] hover:cursor-pointer"
+            text="text-center"
+            onClick={() => navigate("/create_article")}
+          />
+        </div>
+
       </div>
     </>
   );

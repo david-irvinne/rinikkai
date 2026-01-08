@@ -15,6 +15,28 @@ function Articles() {
   const [articles, setArticles] = useState<Article[]>([]);
   const navigate = useNavigate();
 
+  const handleDeleteArticle = async (id: number) => {
+    try {
+      const res = await fetch(`${API_URL}/article/${id}`, {
+        method: "DELETE"
+      });
+
+      if(!res.ok){
+        const err = await res.json();
+        alert(err.error || "gagal menghapus artikel");
+        return ;
+      }
+
+      alert("artikel berhasil dihapus");
+      navigate("/articles");
+    }
+    catch (err) {
+      console.error(err);
+      alert("problem in deleting articles");
+    }
+    
+  }
+
   useEffect(() => {
     fetch(`${API_URL}/all`)
     .then(res => res.json())
@@ -46,6 +68,7 @@ function Articles() {
             <div className="space-x-[0.4rem]">
               <button type="button" className="bg-amber-300 rounded-lg hover:cursor-pointer hover:bg-amber-400 p-[0.4rem] transition" onClick={() => navigate(`/edit_article/${a.id}`)}>Edit</button>
               <button type="button" className="bg-emerald-200 rounded-lg hover:cursor-pointer hover:bg-emerald-300 p-[0.4rem] transition" onClick={() => navigate(`/show_article/${a.id}`)}>Details</button>
+              <button type="button" className="bg-red-700 rounded-lg hover:cursor-pointer hover:bg-red-800 text-white p-[0.4rem] transition" onClick={() => handleDeleteArticle(a.id || 1)}>Delete</button>
 
 
             </div>

@@ -10,6 +10,7 @@ import Members from "./pages/Members"
 import ShowArticle from "./pages/ShowArticle";
 import Articles from "./pages/Articles";
 import EditArticle from "./pages/EditArticle";
+import CreateArticle from "./pages/CreateArticle"
 
 function App() {
   console.log(import.meta.env.CORS_URL);
@@ -28,6 +29,7 @@ function App() {
           <Route path="/articles" element={<Articles/> }/>
           <Route path="/show_article/:id" element={<ShowArticle/>}/> 
           <Route path="/edit_article/:id" element={<EditArticle/> }/>
+          <Route path="/create_article/" element={<CreateArticle/> }/>
         </Routes>
       </div>
       
