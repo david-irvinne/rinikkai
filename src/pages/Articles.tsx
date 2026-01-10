@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import remarkGfm from "remark-gfm";
 
 type Article = {
-  id?:number; 
+  id:string; 
   title: string;
   description: string;
   markdown: string;
@@ -15,7 +15,7 @@ function Articles() {
   const [articles, setArticles] = useState<Article[]>([]);
   const navigate = useNavigate();
 
-  const handleDeleteArticle = async (id: number) => {
+  const handleDeleteArticle = async (id: string) => {
     try {
       const res = await fetch(`${API_URL}/article/${id}`, {
         method: "DELETE"
@@ -28,20 +28,33 @@ function Articles() {
       }
 
       alert("artikel berhasil dihapus");
-      navigate("/articles");
+      await fetchArticles();
     }
     catch (err) {
       console.error(err);
       alert("problem in deleting articles");
     }
-    
+  }
+  
+  const fetchArticles = async () => {
+    try {
+      const res = await fetch(`${API_URL}/all`);
+      const data = await res.json();
+
+      setArticles(
+        data.map((a: any) => ({
+          ...a,
+          id: a._id.$oid
+        }))
+      );
+    }
+    catch(err) {
+      console.error(err);
+    }
   }
 
-  useEffect(() => {
-    fetch(`${API_URL}/all`)
-    .then(res => res.json())
-    .then(data => setArticles(data))
-    .catch(err => console.log(err));
+  useEffect( () => {
+    fetchArticles();
   }, []);
 
   return (
@@ -68,7 +81,7 @@ function Articles() {
             <div className="space-x-[0.4rem]">
               <button type="button" className="bg-amber-300 rounded-lg hover:cursor-pointer hover:bg-amber-400 p-[0.4rem] transition" onClick={() => navigate(`/edit_article/${a.id}`)}>Edit</button>
               <button type="button" className="bg-emerald-200 rounded-lg hover:cursor-pointer hover:bg-emerald-300 p-[0.4rem] transition" onClick={() => navigate(`/show_article/${a.id}`)}>Details</button>
-              <button type="button" className="bg-red-700 rounded-lg hover:cursor-pointer hover:bg-red-800 text-white p-[0.4rem] transition" onClick={() => handleDeleteArticle(a.id || 1)}>Delete</button>
+              <button type="button" className="bg-red-700 rounded-lg hover:cursor-pointer hover:bg-red-800 text-white p-[0.4rem] transition" onClick={() => handleDeleteArticle(a.id)}>Delete</button>
 
 
             </div>
