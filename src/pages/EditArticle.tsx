@@ -13,7 +13,11 @@ function EditArticle() {
   const API_URL = import.meta.env.VITE_CORS_URL;
   const {id} = useParams<{id: string}>();
 
-  const [article, setArticle] = useState<Article>();
+  const [article, setArticle] = useState<Article>({
+    title: "", 
+    description: "",
+    markdown: ""
+  });
   const navigate = useNavigate();
 
   useEffect(() => {
